@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="myBoard">
+<head>
+	<title>board</title>
+	<script src="./js/angular.js"></script>
+	<script src="./js/angular-ui-router.js"></script>
+	<script src="./controller/listCtrl.js"></script>
+	<script src="./controller/newCtrl.js"></script>
+	<script src="./controller/detailCtrl.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap-theme.css">
+<style>
+body {
+	margin:10px;
+}
+textarea {
+	width:100%;
+}
+</style>
+<script>
+	
+	var app = angular.module('myBoard',['ui.router','listCtrlModule','newCtrlModule','detailCtrlModule']);
+
+	app.config(['$stateProvider', '$urlRouterProvider','$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
+		$urlRouterProvider.otherwise('/boardHome');
+		$stateProvider
+			.state('home',{
+				url:'/boardHome',
+				templateUrl:'./views/home.html'
+			})
+			.state('detail',{
+				url:'/boardDetail/:id',
+				templateUrl:'./views/detail.html',
+				controller:'detailCtrl'
+			})
+			.state('list',{
+				url:'/boardList',
+				templateUrl:'./views/list.html',
+				controller:'listCtrl'
+			})
+			.state('new', {
+				url: '/boardNew',
+				templateUrl:'./views/new.html',
+				controller:'newCtrl'
+			})		
+		$locationProvider
+		.html5Mode(true)
+		.hashPrefix('!');
+	}]);
+
+</script>
+</script>
+</head>
+<body>
+<div class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" ui-sref="home">board</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a ui-sref="list">list</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a ui-sref="new">new</a></li> 
+		</ul>
+	</div>
+</div>
+<div ui-view></div>
+</body>
+</html>

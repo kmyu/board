@@ -1,0 +1,16 @@
+<table class="table table-hover">
+	<thead>
+		<th>no</th>
+		<th>title</th>
+		<th>creator</th>
+		<th>createDate</th>
+	</thead>
+	<tbody>
+		<tr ng-repeat="doc in docs" ng-dblclick="showDetail(doc._id)">
+			<td>#</td>
+			<td>{{doc.title}}</td>
+			<td>{{doc.creator}}</td>
+			<td>{{doc.createDate}}</td>
+		</tr>
+	</tbody>
+</table>
